@@ -108,6 +108,99 @@
   font-weight: 650;
 }
 
+.navMobile {
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
+.iconButton {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-h);
+  border-radius: 12px;
+  padding: 8px 10px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.12s ease;
+}
+
+.iconButton:hover {
+  box-shadow: var(--shadow);
+  border-color: color-mix(in oklab, var(--accent-border) 55%, var(--border));
+}
+
+.iconButton:active {
+  transform: translateY(1px);
+}
+
+.iconButton:focus-visible {
+  outline: 2px solid var(--accent-border);
+  outline-offset: 2px;
+}
+
+.drawerOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: rgba(2, 6, 23, 0.55);
+  display: grid;
+  justify-content: end;
+}
+
+.drawer {
+  width: min(380px, 90vw);
+  height: 100%;
+  background: var(--bg);
+  border-left: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  padding: 14px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 12px;
+}
+
+.drawerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.drawerTitle {
+  margin: 0;
+  color: var(--text-h);
+  font-weight: 750;
+  letter-spacing: -0.3px;
+}
+
+.drawerLinks {
+  display: grid;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.drawerLink {
+  text-decoration: none;
+  color: var(--text-h);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 12px 12px;
+  font-weight: 650;
+}
+
+.drawerLink:hover {
+  box-shadow: var(--shadow);
+  border-color: color-mix(in oklab, var(--accent-border) 55%, var(--border));
+}
+
+.drawerBottom {
+  display: grid;
+  gap: 10px;
+}
+
 .page {
   padding: 0 20px 64px;
 }
@@ -641,8 +734,12 @@
     padding: 8px 10px;
   }
 
-  .themeText {
+  .navDesktop {
     display: none;
+  }
+
+  .navMobile {
+    display: inline-flex;
   }
 
   .page {

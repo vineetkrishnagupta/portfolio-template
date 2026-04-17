@@ -27,7 +27,7 @@ function App() {
 
   const profile = {
     name: 'Your Name',
-    role: 'Fullstack Developer',
+    role: 'Frontend Developer',
     location: 'City, Country',
     blurb:
       'I build fast, accessible, and delightful web experiences. I like clean UI, strong UX, and pragmatic engineering.',
@@ -130,6 +130,7 @@ function App() {
   ]
 
   const [lightbox, setLightbox] = useState(null)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
     if (!lightbox) return
@@ -140,6 +141,32 @@ function App() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [lightbox])
 
+  useEffect(() => {
+    if (!isMenuOpen) return
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') setIsMenuOpen(false)
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [isMenuOpen])
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMenuOpen])
+
+  const navItems = [
+    { label: 'About', href: '#about' },
+    { label: 'Projects', href: '#projects' },
+    { label: 'Skills', href: '#skills' },
+    { label: 'Experience', href: '#experience' },
+    { label: 'Education', href: '#education' },
+    { label: 'Certifications', href: '#certifications' },
+    { label: 'Contact', href: '#contact' },
+  ]
+
   return (
     <>
       <header className="topbar">
@@ -149,13 +176,12 @@ function App() {
           </span>
           <span>{profile.name}</span>
         </a>
-        <nav className="nav" aria-label="Primary">
-          <a href="#about">About</a>
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#experience">Experience</a>
-          <a href="#education">Education</a>
-          <a href="#certifications">Certifications</a>
+        <nav className="nav navDesktop" aria-label="Primary">
+          {navItems.slice(0, -1).map((i) => (
+            <a key={i.href} href={i.href}>
+              {i.label}
+            </a>
+          ))}
           <a className="resumeLink" href={profile.resumeUrl} download>
             Resume
           </a>
@@ -176,7 +202,75 @@ function App() {
             Contact
           </a>
         </nav>
+
+        <div className="navMobile" aria-label="Mobile actions">
+          <button
+            type="button"
+            className="iconButton"
+            aria-label={`Theme: ${themeLabel}. Click to change.`}
+            onClick={() =>
+              setTheme((t) => (t === 'system' ? 'light' : t === 'light' ? 'dark' : 'system'))
+            }
+          >
+            <span className="themeIcon" aria-hidden="true">
+              {theme === 'dark' ? '☾' : theme === 'light' ? '☀︎' : '◐'}
+            </span>
+          </button>
+          <button
+            type="button"
+            className="iconButton"
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-drawer"
+            onClick={() => setIsMenuOpen((v) => !v)}
+          >
+            <span aria-hidden="true">{isMenuOpen ? '✕' : '☰'}</span>
+          </button>
+        </div>
       </header>
+
+      {isMenuOpen ? (
+        <div
+          className="drawerOverlay"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) setIsMenuOpen(false)
+          }}
+        >
+          <aside id="mobile-drawer" className="drawer">
+            <div className="drawerTop">
+              <p className="drawerTitle">Menu</p>
+              <button type="button" className="iconButton" aria-label="Close menu" onClick={() => setIsMenuOpen(false)}>
+                <span aria-hidden="true">✕</span>
+              </button>
+            </div>
+
+            <div className="drawerLinks" aria-label="Site sections">
+              {navItems.map((i) => (
+                <a
+                  key={i.href}
+                  className="drawerLink"
+                  href={i.href}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {i.label}
+                </a>
+              ))}
+            </div>
+
+            <div className="drawerBottom">
+              <a className="button primary" href={profile.resumeUrl} download onClick={() => setIsMenuOpen(false)}>
+                Download resume
+              </a>
+              <a className="button ghost" href={`mailto:${profile.email}`} onClick={() => setIsMenuOpen(false)}>
+                Email me
+              </a>
+            </div>
+          </aside>
+        </div>
+      ) : null}
 
       <main id="top" className="page">
         <section className="heroSection">
