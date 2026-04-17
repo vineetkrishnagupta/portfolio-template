@@ -1,0 +1,135 @@
+:root {
+  --text: #5a5f6a;
+  --text-h: #0b1020;
+  --bg: #ffffff;
+  --border: rgba(15, 23, 42, 0.12);
+  --code-bg: rgba(15, 23, 42, 0.06);
+  --accent: #6d28d9;
+  --accent-bg: rgba(109, 40, 217, 0.12);
+  --accent-border: rgba(109, 40, 217, 0.35);
+  --social-bg: rgba(15, 23, 42, 0.06);
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-2: rgba(255, 255, 255, 0.52);
+  --shadow:
+    rgba(2, 6, 23, 0.12) 0 14px 26px -18px,
+    rgba(2, 6, 23, 0.08) 0 8px 16px -12px;
+
+  --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    'Apple Color Emoji', 'Segoe UI Emoji';
+  --heading: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+
+  font: 16px/150% var(--sans);
+  letter-spacing: 0.15px;
+  color: var(--text);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Theme resolution:
+   - default (no data-theme): follows system preference via media query
+   - data-theme="light" or "dark": forces that theme */
+
+:root[data-theme='dark'] {
+  --text: rgba(226, 232, 240, 0.78);
+  --text-h: rgba(248, 250, 252, 0.95);
+  --bg: #0b1020;
+  --border: rgba(148, 163, 184, 0.18);
+  --code-bg: rgba(148, 163, 184, 0.12);
+  --accent: #a78bfa;
+  --accent-bg: rgba(167, 139, 250, 0.18);
+  --accent-border: rgba(167, 139, 250, 0.38);
+  --social-bg: rgba(148, 163, 184, 0.12);
+  --surface: rgba(15, 23, 42, 0.66);
+  --surface-2: rgba(15, 23, 42, 0.42);
+  --shadow:
+    rgba(0, 0, 0, 0.5) 0 16px 30px -18px,
+    rgba(0, 0, 0, 0.35) 0 10px 20px -14px;
+}
+
+:root[data-theme='light'] {
+  --text: #5a5f6a;
+  --text-h: #0b1020;
+  --bg: #ffffff;
+  --border: rgba(15, 23, 42, 0.12);
+  --code-bg: rgba(15, 23, 42, 0.06);
+  --accent: #6d28d9;
+  --accent-bg: rgba(109, 40, 217, 0.12);
+  --accent-border: rgba(109, 40, 217, 0.35);
+  --social-bg: rgba(15, 23, 42, 0.06);
+  --shadow:
+    rgba(2, 6, 23, 0.12) 0 14px 26px -18px,
+    rgba(2, 6, 23, 0.08) 0 8px 16px -12px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --text: rgba(226, 232, 240, 0.78);
+    --text-h: rgba(248, 250, 252, 0.95);
+    --bg: #0b1020;
+    --border: rgba(148, 163, 184, 0.18);
+    --code-bg: rgba(148, 163, 184, 0.12);
+    --accent: #a78bfa;
+    --accent-bg: rgba(167, 139, 250, 0.18);
+    --accent-border: rgba(167, 139, 250, 0.38);
+    --social-bg: rgba(148, 163, 184, 0.12);
+    --surface: rgba(15, 23, 42, 0.66);
+    --surface-2: rgba(15, 23, 42, 0.42);
+    --shadow:
+      rgba(0, 0, 0, 0.5) 0 16px 30px -18px,
+      rgba(0, 0, 0, 0.35) 0 10px 20px -14px;
+  }
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background:
+    radial-gradient(1200px 700px at 12% -10%, rgba(109, 40, 217, 0.18), transparent 60%),
+    radial-gradient(900px 600px at 100% 0%, rgba(14, 165, 233, 0.16), transparent 55%),
+    radial-gradient(900px 700px at 50% 100%, rgba(34, 197, 94, 0.10), transparent 65%),
+    var(--bg);
+}
+
+#root {
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: 100svh;
+}
+
+h1,
+h2 {
+  font-family: var(--heading);
+  color: var(--text-h);
+}
+
+h2 {
+  letter-spacing: -0.4px;
+}
+p {
+  margin: 0;
+}
+
+code {
+  font-family: var(--mono);
+  border-radius: 4px;
+}
+
+code {
+  font-size: 15px;
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
