@@ -1,6 +1,104 @@
 import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 
+function Icon({ name, className, title }) {
+  const common = {
+    className,
+    width: 20,
+    height: 20,
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    xmlns: 'http://www.w3.org/2000/svg',
+    'aria-hidden': title ? undefined : true,
+    role: title ? 'img' : 'presentation',
+  }
+
+  const stroke = {
+    stroke: 'currentColor',
+    strokeWidth: 1.8,
+    strokeLinecap: 'round',
+    strokeLinejoin: 'round',
+  }
+
+  switch (name) {
+    case 'sun':
+      return (
+        <svg {...common}>
+          {title ? <title>{title}</title> : null}
+          <path {...stroke} d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" />
+          <path {...stroke} d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19" />
+        </svg>
+      )
+    case 'moon':
+      return (
+        <svg {...common}>
+          {title ? <title>{title}</title> : null}
+          <path
+            {...stroke}
+            d="M21 14.2A7.5 7.5 0 0 1 9.8 3a6.5 6.5 0 1 0 11.2 11.2Z"
+          />
+        </svg>
+      )
+    case 'system':
+      return (
+        <svg {...common}>
+          {title ? <title>{title}</title> : null}
+          <path {...stroke} d="M7 3h10M9 21h6" />
+          <path {...stroke} d="M7 3v7a5 5 0 0 0 10 0V3" />
+          <path {...stroke} d="M12 10v8" />
+        </svg>
+      )
+    case 'menu':
+      return (
+        <svg {...common}>
+          {title ? <title>{title}</title> : null}
+          <path {...stroke} d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      )
+    case 'close':
+      return (
+        <svg {...common}>
+          {title ? <title>{title}</title> : null}
+          <path {...stroke} d="M6 6l12 12M18 6 6 18" />
+        </svg>
+      )
+    case 'mail':
+      return (
+        <svg {...common}>
+          {title ? <title>{title}</title> : null}
+          <path {...stroke} d="M4.5 7.5h15v10h-15v-10Z" />
+          <path {...stroke} d="m5 8 7 6 7-6" />
+        </svg>
+      )
+    case 'phone':
+      return (
+        <svg {...common}>
+          {title ? <title>{title}</title> : null}
+          <path
+            {...stroke}
+            d="M8 4.5c.5-1 2-1 2.6 0l1 1.8c.4.8.2 1.8-.6 2.3l-1 .7c.7 1.7 2 3 3.7 3.7l.7-1c.5-.7 1.5-1 2.3-.6l1.8 1c1 .6 1 2.1 0 2.6-1.1.6-2.5 1.1-3.9 1-6.1-.2-11-5.1-11.2-11.2-.1-1.4.4-2.8 1-3.9Z"
+          />
+        </svg>
+      )
+    case 'whatsapp':
+      return (
+        <svg {...common}>
+          {title ? <title>{title}</title> : null}
+          <path
+            {...stroke}
+            d="M20.5 11.6a8.5 8.5 0 0 1-12.5 7.4L4 20l1-3.7A8.5 8.5 0 1 1 20.5 11.6Z"
+          />
+          <path
+            {...stroke}
+            d="M9.2 8.8c.2-.6.7-.6 1-.6.2 0 .4 0 .6.5l.7 1.7c.1.3.1.6-.2.8l-.6.5c.7 1.3 1.8 2.3 3.1 3l.5-.6c.2-.3.5-.3.8-.2l1.7.7c.4.2.5.4.5.6 0 .3 0 .8-.6 1-1.1.5-2.4.4-3.6-.1-2.8-1.2-5-3.4-6.1-6.2-.5-1.2-.6-2.5-.1-3.6Z"
+          />
+        </svg>
+      )
+    default:
+      return null
+  }
+}
+
 function App() {
   const storageKey = 'theme'
   const [theme, setTheme] = useState(() => {
@@ -25,6 +123,12 @@ function App() {
     return 'System'
   }, [theme])
 
+  const themeIconName = useMemo(() => {
+    if (theme === 'dark') return 'moon'
+    if (theme === 'light') return 'sun'
+    return 'system'
+  }, [theme])
+
   const profile = {
     name: 'Your Name',
     role: 'Frontend Developer',
@@ -32,6 +136,8 @@ function App() {
     blurb:
       'I build fast, accessible, and delightful web experiences. I like clean UI, strong UX, and pragmatic engineering.',
     email: 'you@example.com',
+    phone: '+91 98765 43210',
+    whatsapp: '+91 98765 43210',
     resumeUrl: '/resume.pdf',
     imageSrc: '/profile.svg',
     socials: [
@@ -136,6 +242,18 @@ function App() {
     if (!lightbox) return
     const onKeyDown = (e) => {
       if (e.key === 'Escape') setLightbox(null)
+      if (e.key === 'ArrowRight' && lightbox?.items?.length) {
+        setLightbox((lb) => ({
+          ...lb,
+          index: Math.min(lb.index + 1, lb.items.length - 1),
+        }))
+      }
+      if (e.key === 'ArrowLeft' && lightbox?.items?.length) {
+        setLightbox((lb) => ({
+          ...lb,
+          index: Math.max(lb.index - 1, 0),
+        }))
+      }
     }
     window.addEventListener('keydown', onKeyDown)
     return () => window.removeEventListener('keydown', onKeyDown)
@@ -167,6 +285,12 @@ function App() {
     { label: 'Contact', href: '#contact' },
   ]
 
+  const phoneHref = useMemo(() => `tel:${String(profile.phone).replace(/[^\d+]/g, '')}`, [profile.phone])
+  const whatsappHref = useMemo(() => {
+    const digits = String(profile.whatsapp).replace(/\D/g, '')
+    return `https://wa.me/${digits}`
+  }, [profile.whatsapp])
+
   return (
     <>
       <header className="topbar">
@@ -194,7 +318,7 @@ function App() {
             }
           >
             <span className="themeIcon" aria-hidden="true">
-              {theme === 'dark' ? '☾' : theme === 'light' ? '☀︎' : '◐'}
+              <Icon name={themeIconName} />
             </span>
             <span className="themeText">{themeLabel}</span>
           </button>
@@ -213,7 +337,7 @@ function App() {
             }
           >
             <span className="themeIcon" aria-hidden="true">
-              {theme === 'dark' ? '☾' : theme === 'light' ? '☀︎' : '◐'}
+              <Icon name={themeIconName} />
             </span>
           </button>
           <button
@@ -224,7 +348,9 @@ function App() {
             aria-controls="mobile-drawer"
             onClick={() => setIsMenuOpen((v) => !v)}
           >
-            <span aria-hidden="true">{isMenuOpen ? '✕' : '☰'}</span>
+            <span className="iconGlyph" aria-hidden="true">
+              <Icon name={isMenuOpen ? 'close' : 'menu'} />
+            </span>
           </button>
         </div>
       </header>
@@ -243,7 +369,9 @@ function App() {
             <div className="drawerTop">
               <p className="drawerTitle">Menu</p>
               <button type="button" className="iconButton" aria-label="Close menu" onClick={() => setIsMenuOpen(false)}>
-                <span aria-hidden="true">✕</span>
+                <span className="iconGlyph" aria-hidden="true">
+                  <Icon name="close" />
+                </span>
               </button>
             </div>
 
@@ -265,7 +393,22 @@ function App() {
                 Download resume
               </a>
               <a className="button ghost" href={`mailto:${profile.email}`} onClick={() => setIsMenuOpen(false)}>
-                Email me
+                <span className="btnIcon" aria-hidden="true">
+                  <Icon name="mail" />
+                </span>
+                Email
+              </a>
+              <a className="button ghost" href={phoneHref} onClick={() => setIsMenuOpen(false)}>
+                <span className="btnIcon" aria-hidden="true">
+                  <Icon name="phone" />
+                </span>
+                Call
+              </a>
+              <a className="button ghost" href={whatsappHref} target="_blank" rel="noreferrer" onClick={() => setIsMenuOpen(false)}>
+                <span className="btnIcon" aria-hidden="true">
+                  <Icon name="whatsapp" />
+                </span>
+                WhatsApp
               </a>
             </div>
           </aside>
@@ -384,14 +527,30 @@ function App() {
                 </div>
                 {p.screenshots?.length ? (
                   <div className="shotBlock" aria-label={`${p.title} screenshots`}>
-                    <p className="shotLabel">Screenshots</p>
-                    <div className="shotGrid">
-                      {p.screenshots.map((s) => (
+                    <div className="shotHeader">
+                      <p className="shotLabel">Gallery</p>
+                      <button
+                        type="button"
+                        className="miniButton"
+                        onClick={() => setLightbox({ items: p.screenshots, index: 0, title: `${p.title} — screenshots` })}
+                      >
+                        View all ({p.screenshots.length})
+                      </button>
+                    </div>
+
+                    <div className="shotRail" aria-label={`${p.title} screenshot thumbnails`}>
+                      {p.screenshots.map((s, idx) => (
                         <button
-                          key={s.src}
+                          key={`${s.src}-${idx}`}
                           type="button"
-                          className="shot"
-                          onClick={() => setLightbox({ src: s.src, alt: s.alt })}
+                          className="shotThumb"
+                          onClick={() =>
+                            setLightbox({
+                              items: p.screenshots,
+                              index: idx,
+                              title: `${p.title} — screenshots`,
+                            })
+                          }
                         >
                           <img src={s.src} alt={s.alt} loading="lazy" />
                         </button>
@@ -499,7 +658,13 @@ function App() {
                 <button
                   type="button"
                   className="certMedia"
-                  onClick={() => setLightbox({ src: c.imageSrc, alt: `${c.title} certificate` })}
+                  onClick={() =>
+                    setLightbox({
+                      items: [{ src: c.imageSrc, alt: `${c.title} certificate` }],
+                      index: 0,
+                      title: 'Certificate',
+                    })
+                  }
                 >
                   <img src={c.imageSrc} alt={`${c.title} certificate`} loading="lazy" />
                 </button>
@@ -519,14 +684,29 @@ function App() {
             <div>
               <h2>Contact</h2>
               <p className="muted">
-                Want to collaborate or hire me? The fastest way is email.
+                Want to collaborate or hire me? Reach out via email, phone, or WhatsApp.
               </p>
             </div>
             <div className="calloutActions">
               <a className="button primary" href={`mailto:${profile.email}`}>
-                {profile.email}
+                <span className="btnIcon" aria-hidden="true">
+                  <Icon name="mail" />
+                </span>
+                Email: {profile.email}
               </a>
-              <a className="button ghost" href="#top">
+              <a className="button ghost" href={phoneHref}>
+                <span className="btnIcon" aria-hidden="true">
+                  <Icon name="phone" />
+                </span>
+                Phone: {profile.phone}
+              </a>
+              <a className="button ghost" href={whatsappHref} target="_blank" rel="noreferrer">
+                <span className="btnIcon" aria-hidden="true">
+                  <Icon name="whatsapp" />
+                </span>
+                WhatsApp: {profile.whatsapp}
+              </a>
+              <a className="button ghost backTop" href="#top">
                 Back to top
               </a>
             </div>
@@ -550,15 +730,59 @@ function App() {
             if (e.target === e.currentTarget) setLightbox(null)
           }}
         >
+          {(() => {
+            const items = lightbox.items ?? [{ src: lightbox.src, alt: lightbox.alt }]
+            const index = typeof lightbox.index === 'number' ? lightbox.index : 0
+            const current = items[index] ?? items[0]
+            const title = lightbox.title ?? current?.alt ?? 'Preview'
+            const canPrev = index > 0
+            const canNext = index < items.length - 1
+            return (
           <div className="lightboxInner">
             <div className="lightboxBar">
-              <p className="lightboxTitle">{lightbox.alt}</p>
-              <button type="button" className="lightboxClose" onClick={() => setLightbox(null)}>
-                Close
-              </button>
+              <div className="lightboxBarLeft">
+                <p className="lightboxTitle">{title}</p>
+                <p className="lightboxMeta">
+                  {items.length > 1 ? `${index + 1} / ${items.length}` : null}
+                </p>
+              </div>
+              <div className="lightboxBarRight">
+                {items.length > 1 ? (
+                  <>
+                    <button
+                      type="button"
+                      className="lightboxNav"
+                      disabled={!canPrev}
+                      onClick={() =>
+                        setLightbox((lb) => ({ ...lb, index: Math.max((lb.index ?? 0) - 1, 0) }))
+                      }
+                    >
+                      Prev
+                    </button>
+                    <button
+                      type="button"
+                      className="lightboxNav"
+                      disabled={!canNext}
+                      onClick={() =>
+                        setLightbox((lb) => ({
+                          ...lb,
+                          index: Math.min((lb.index ?? 0) + 1, (lb.items?.length ?? 1) - 1),
+                        }))
+                      }
+                    >
+                      Next
+                    </button>
+                  </>
+                ) : null}
+                <button type="button" className="lightboxClose" onClick={() => setLightbox(null)}>
+                  Close
+                </button>
+              </div>
             </div>
-            <img className="lightboxImg" src={lightbox.src} alt={lightbox.alt} />
+            <img className="lightboxImg" src={current.src} alt={current.alt} />
           </div>
+            )
+          })()}
         </div>
       ) : null}
     </>
