@@ -1,105 +1,22 @@
 import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 
-function Icon({ name, className, title }) {
-  const common = {
-    className,
-    width: 20,
-    height: 20,
-    viewBox: '0 0 24 24',
-    fill: 'none',
-    xmlns: 'http://www.w3.org/2000/svg',
-    'aria-hidden': title ? undefined : true,
-    role: title ? 'img' : 'presentation',
-  }
-
-  const stroke = {
-    stroke: 'currentColor',
-    strokeWidth: 1.8,
-    strokeLinecap: 'round',
-    strokeLinejoin: 'round',
-  }
-
-  switch (name) {
-    case 'sun':
-      return (
-        <svg {...common}>
-          {title ? <title>{title}</title> : null}
-          <path {...stroke} d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" />
-          <path {...stroke} d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5 19 19M19 5l-1.5 1.5M6.5 17.5 5 19" />
-        </svg>
-      )
-    case 'moon':
-      return (
-        <svg {...common}>
-          {title ? <title>{title}</title> : null}
-          <path
-            {...stroke}
-            d="M21 14.2A7.5 7.5 0 0 1 9.8 3a6.5 6.5 0 1 0 11.2 11.2Z"
-          />
-        </svg>
-      )
-    case 'system':
-      return (
-        <svg {...common}>
-          {title ? <title>{title}</title> : null}
-          <path {...stroke} d="M7 3h10M9 21h6" />
-          <path {...stroke} d="M7 3v7a5 5 0 0 0 10 0V3" />
-          <path {...stroke} d="M12 10v8" />
-        </svg>
-      )
-    case 'menu':
-      return (
-        <svg {...common}>
-          {title ? <title>{title}</title> : null}
-          <path {...stroke} d="M4 7h16M4 12h16M4 17h16" />
-        </svg>
-      )
-    case 'close':
-      return (
-        <svg {...common}>
-          {title ? <title>{title}</title> : null}
-          <path {...stroke} d="M6 6l12 12M18 6 6 18" />
-        </svg>
-      )
-    case 'mail':
-      return (
-        <svg {...common}>
-          {title ? <title>{title}</title> : null}
-          <path {...stroke} d="M4.5 7.5h15v10h-15v-10Z" />
-          <path {...stroke} d="m5 8 7 6 7-6" />
-        </svg>
-      )
-    case 'phone':
-      return (
-        <svg {...common}>
-          {title ? <title>{title}</title> : null}
-          <path
-            {...stroke}
-            d="M8 4.5c.5-1 2-1 2.6 0l1 1.8c.4.8.2 1.8-.6 2.3l-1 .7c.7 1.7 2 3 3.7 3.7l.7-1c.5-.7 1.5-1 2.3-.6l1.8 1c1 .6 1 2.1 0 2.6-1.1.6-2.5 1.1-3.9 1-6.1-.2-11-5.1-11.2-11.2-.1-1.4.4-2.8 1-3.9Z"
-          />
-        </svg>
-      )
-    case 'whatsapp':
-      return (
-        <svg {...common}>
-          {title ? <title>{title}</title> : null}
-          <path
-            {...stroke}
-            d="M20.5 11.6a8.5 8.5 0 0 1-12.5 7.4L4 20l1-3.7A8.5 8.5 0 1 1 20.5 11.6Z"
-          />
-          <path
-            {...stroke}
-            d="M9.2 8.8c.2-.6.7-.6 1-.6.2 0 .4 0 .6.5l.7 1.7c.1.3.1.6-.2.8l-.6.5c.7 1.3 1.8 2.3 3.1 3l.5-.6c.2-.3.5-.3.8-.2l1.7.7c.4.2.5.4.5.6 0 .3 0 .8-.6 1-1.1.5-2.4.4-3.6-.1-2.8-1.2-5-3.4-6.1-6.2-.5-1.2-.6-2.5-.1-3.6Z"
-          />
-        </svg>
-      )
-    default:
-      return null
-  }
-}
+// Remove the custom Icon component and use Bootstrap Icons instead
+// Add this to your index.html or include here via useEffect
 
 function App() {
+  // Add Bootstrap Icons CDN to head
+  useEffect(() => {
+    const link = document.createElement('link')
+    link.rel = 'stylesheet'
+    link.href = 'https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css'
+    document.head.appendChild(link)
+    
+    return () => {
+      document.head.removeChild(link)
+    }
+  }, [])
+
   const storageKey = 'theme'
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem(storageKey)
@@ -124,9 +41,9 @@ function App() {
   }, [theme])
 
   const themeIconName = useMemo(() => {
-    if (theme === 'dark') return 'moon'
-    if (theme === 'light') return 'sun'
-    return 'system'
+    if (theme === 'dark') return 'bi-moon-fill'
+    if (theme === 'light') return 'bi-brightness-high-fill'
+    return 'bi-display'
   }, [theme])
 
   const profile = {
@@ -141,10 +58,23 @@ function App() {
     resumeUrl: '/resume.pdf',
     imageSrc: '/profile.svg',
     socials: [
-      { label: 'GitHub', href: 'https://github.com/your-handle' },
-      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/your-handle/' },
-      { label: 'X', href: 'https://x.com/your-handle' },
+      { label: 'GitHub', href: 'https://github.com/your-handle', icon: 'bi-github' },
+      { label: 'LinkedIn', href: 'https://www.linkedin.com/in/your-handle/', icon: 'bi-linkedin' },
+      { label: 'X', href: 'https://x.com/your-handle', icon: 'bi-twitter-x' },
     ],
+  }
+
+  // About data
+  const aboutData = {
+    bio: "I'm a passionate Frontend Developer with over 3 years of experience crafting beautiful and performant web applications. I love turning complex problems into simple, elegant solutions. My journey in tech started when I built my first website in college, and I've been hooked ever since.",
+    interests: [
+      'Open Source Contributions',
+      'UI/UX Design',
+      'Performance Optimization',
+      'Technical Writing',
+      'Mentoring Junior Developers',
+    ],
+    funFact: "I can solve a Rubik's cube in under 2 minutes! 🧩",
   }
 
   const projects = [
@@ -318,7 +248,7 @@ function App() {
             }
           >
             <span className="themeIcon" aria-hidden="true">
-              <Icon name={themeIconName} />
+              <i className={themeIconName}></i>
             </span>
             <span className="themeText">{themeLabel}</span>
           </button>
@@ -337,7 +267,7 @@ function App() {
             }
           >
             <span className="themeIcon" aria-hidden="true">
-              <Icon name={themeIconName} />
+              <i className={themeIconName}></i>
             </span>
           </button>
           <button
@@ -349,7 +279,7 @@ function App() {
             onClick={() => setIsMenuOpen((v) => !v)}
           >
             <span className="iconGlyph" aria-hidden="true">
-              <Icon name={isMenuOpen ? 'close' : 'menu'} />
+              <i className={isMenuOpen ? 'bi-x-lg' : 'bi-list'}></i>
             </span>
           </button>
         </div>
@@ -370,7 +300,7 @@ function App() {
               <p className="drawerTitle">Menu</p>
               <button type="button" className="iconButton" aria-label="Close menu" onClick={() => setIsMenuOpen(false)}>
                 <span className="iconGlyph" aria-hidden="true">
-                  <Icon name="close" />
+                  <i className="bi-x-lg"></i>
                 </span>
               </button>
             </div>
@@ -394,19 +324,19 @@ function App() {
               </a>
               <a className="button ghost" href={`mailto:${profile.email}`} onClick={() => setIsMenuOpen(false)}>
                 <span className="btnIcon" aria-hidden="true">
-                  <Icon name="mail" />
+                  <i className="bi-envelope"></i>
                 </span>
                 Email
               </a>
               <a className="button ghost" href={phoneHref} onClick={() => setIsMenuOpen(false)}>
                 <span className="btnIcon" aria-hidden="true">
-                  <Icon name="phone" />
+                  <i className="bi-telephone"></i>
                 </span>
                 Call
               </a>
               <a className="button ghost" href={whatsappHref} target="_blank" rel="noreferrer" onClick={() => setIsMenuOpen(false)}>
                 <span className="btnIcon" aria-hidden="true">
-                  <Icon name="whatsapp" />
+                  <i className="bi-whatsapp"></i>
                 </span>
                 WhatsApp
               </a>
@@ -440,6 +370,7 @@ function App() {
               <div className="heroSocial" aria-label="Social links">
                 {profile.socials.map((s) => (
                   <a key={s.label} className="chip" href={s.href} target="_blank" rel="noreferrer">
+                    <i className={s.icon} style={{ marginRight: '6px' }}></i>
                     {s.label}
                   </a>
                 ))}
@@ -484,9 +415,7 @@ function App() {
         <section id="about" className="section">
           <div className="sectionHead">
             <h2>About</h2>
-            <p>
-              A quick intro you can tailor. Keep this to 2–4 lines for best readability.
-            </p>
+            <p>A quick intro you can tailor. Keep this to 2–4 lines for best readability.</p>
           </div>
           <div className="twoCol">
             <div className="card">
@@ -618,6 +547,44 @@ function App() {
           </div>
         </section>
 
+        {/* Detailed About Me Section */}
+        <section id="about-detailed" className="section">
+          <div className="sectionHead">
+            <h2>More About Me</h2>
+            <p>Get to know the person behind the code.</p>
+          </div>
+          <div className="grid">
+            <div className="card">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                <span className="themeIcon" aria-hidden="true">
+                  <i className="bi-cup-hot"></i>
+                </span>
+                <h3 style={{ margin: 0 }}>My Story</h3>
+              </div>
+              <p style={{ lineHeight: 1.6, marginBottom: 0 }}>{aboutData.bio}</p>
+            </div>
+            <div className="card">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+                <span className="themeIcon" aria-hidden="true">
+                  <i className="bi-heart"></i>
+                </span>
+                <h3 style={{ margin: 0 }}>Interests & Hobbies</h3>
+              </div>
+              <div className="tagRow" style={{ marginBottom: '16px' }}>
+                {aboutData.interests.map((interest) => (
+                  <span key={interest} className="tag">
+                    {interest}
+                  </span>
+                ))}
+              </div>
+              <div style={{ marginTop: '12px', padding: '12px', background: 'var(--accent-bg)', borderRadius: '12px', border: '1px solid var(--accent-border)' }}>
+                <span className="statLabel" style={{ display: 'block', marginBottom: '4px' }}>🎯 Fun Fact</span>
+                <p style={{ margin: 0, fontWeight: 500 }}>{aboutData.funFact}</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section id="education" className="section">
           <div className="sectionHead">
             <h2>Education</h2>
@@ -690,19 +657,19 @@ function App() {
             <div className="calloutActions">
               <a className="button primary" href={`mailto:${profile.email}`}>
                 <span className="btnIcon" aria-hidden="true">
-                  <Icon name="mail" />
+                  <i className="bi-envelope"></i>
                 </span>
                 Email: {profile.email}
               </a>
               <a className="button ghost" href={phoneHref}>
                 <span className="btnIcon" aria-hidden="true">
-                  <Icon name="phone" />
+                  <i className="bi-telephone"></i>
                 </span>
                 Phone: {profile.phone}
               </a>
               <a className="button ghost" href={whatsappHref} target="_blank" rel="noreferrer">
                 <span className="btnIcon" aria-hidden="true">
-                  <Icon name="whatsapp" />
+                  <i className="bi-whatsapp"></i>
                 </span>
                 WhatsApp: {profile.whatsapp}
               </a>
