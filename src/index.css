@@ -13,6 +13,24 @@
   --shadow:
     rgba(2, 6, 23, 0.12) 0 14px 26px -18px,
     rgba(2, 6, 23, 0.08) 0 8px 16px -12px;
+  
+  /* Colorful accents */
+  --color-red: #ef4444;
+  --color-orange: #f97316;
+  --color-yellow: #eab308;
+  --color-green: #22c55e;
+  --color-blue: #0ea5e9;
+  --color-purple: #6d28d9;
+  --color-pink: #ec4899;
+  --color-indigo: #4f46e5;
+  
+  --color-red-bg: rgba(239, 68, 68, 0.12);
+  --color-orange-bg: rgba(249, 115, 22, 0.12);
+  --color-yellow-bg: rgba(234, 179, 8, 0.12);
+  --color-green-bg: rgba(34, 197, 94, 0.12);
+  --color-blue-bg: rgba(14, 165, 233, 0.12);
+  --color-indigo-bg: rgba(79, 70, 229, 0.12);
+  --color-pink-bg: rgba(236, 72, 153, 0.12);
 
   --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
     'Apple Color Emoji', 'Segoe UI Emoji';
@@ -49,6 +67,23 @@
   --shadow:
     rgba(0, 0, 0, 0.5) 0 16px 30px -18px,
     rgba(0, 0, 0, 0.35) 0 10px 20px -14px;
+  
+  --color-red: #ff6b6b;
+  --color-orange: #ffa94d;
+  --color-yellow: #ffd43b;
+  --color-green: #69db7c;
+  --color-blue: #74c0fc;
+  --color-purple: #c084fc;
+  --color-pink: #ff8787;
+  --color-indigo: #9775fa;
+  
+  --color-red-bg: rgba(255, 107, 107, 0.15);
+  --color-orange-bg: rgba(255, 169, 77, 0.15);
+  --color-yellow-bg: rgba(255, 212, 59, 0.15);
+  --color-green-bg: rgba(105, 219, 124, 0.15);
+  --color-blue-bg: rgba(116, 192, 252, 0.15);
+  --color-indigo-bg: rgba(151, 117, 250, 0.15);
+  --color-pink-bg: rgba(255, 135, 135, 0.15);
 }
 
 :root[data-theme='light'] {
@@ -89,9 +124,10 @@ body {
   margin: 0;
   min-height: 100svh;
   background:
-    radial-gradient(1200px 700px at 12% -10%, rgba(109, 40, 217, 0.18), transparent 60%),
-    radial-gradient(900px 600px at 100% 0%, rgba(14, 165, 233, 0.16), transparent 55%),
-    radial-gradient(900px 700px at 50% 100%, rgba(34, 197, 94, 0.10), transparent 65%),
+    radial-gradient(1200px 700px at 12% -10%, rgba(109, 40, 217, 0.25), transparent 60%),
+    radial-gradient(900px 600px at 100% 0%, rgba(14, 165, 233, 0.22), transparent 55%),
+    radial-gradient(900px 700px at 50% 100%, rgba(34, 197, 94, 0.18), transparent 65%),
+    radial-gradient(800px 800px at 80% 50%, rgba(236, 72, 153, 0.15), transparent 70%),
     var(--bg);
 }
 

@@ -26,10 +26,11 @@
   height: 28px;
   display: grid;
   place-items: center;
-  border-radius: 8px;
-  background: var(--accent-bg);
-  color: var(--accent);
-  border: 1px solid var(--accent-border);
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--color-blue), var(--color-purple));
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  font-weight: 700;
 }
 
 .nav {
@@ -44,7 +45,7 @@
   text-decoration: none;
   color: var(--text);
   padding: 8px 10px;
-  border-radius: 10px;
+  border-radius: 16px;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
@@ -54,18 +55,18 @@
 }
 
 .resumeLink {
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--surface-2);
 }
 
 .navCta {
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--surface-2);
 }
 
 .themeToggle {
   appearance: none;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--surface-2);
   color: var(--text-h);
   border-radius: 999px;
@@ -96,9 +97,9 @@
   height: 18px;
   display: grid;
   place-items: center;
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--accent-bg);
-  border: 1px solid var(--accent-border);
+  border: 1.5px solid var(--accent-border);
   color: var(--text-h);
 }
 
@@ -131,10 +132,10 @@
 
 .iconButton {
   appearance: none;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--surface-2);
   color: var(--text-h);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 8px 10px;
   font-weight: 750;
   cursor: pointer;
@@ -168,7 +169,8 @@
   width: min(380px, 90vw);
   height: 100%;
   background: var(--bg);
-  border-left: 1px solid var(--border);
+  border-left: 3px solid var(--border);
+  border-radius: 20px 0 0 20px;
   box-shadow: var(--shadow);
   padding: 14px;
   display: grid;
@@ -199,9 +201,9 @@
 .drawerLink {
   text-decoration: none;
   color: var(--text-h);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--surface);
-  border-radius: 14px;
+  border-radius: 18px;
   padding: 12px 12px;
   font-weight: 650;
 }
@@ -272,22 +274,25 @@
 .chip {
   text-decoration: none;
   color: var(--text-h);
-  background: var(--surface-2);
-  border: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--color-indigo-bg), var(--color-blue-bg));
+  border: 2px solid rgba(79, 70, 229, 0.6);
   padding: 8px 12px;
   border-radius: 999px;
   font-size: 14px;
+  font-weight: 600;
 }
 
 .chip:hover {
-  border-color: var(--accent-border);
+  border-color: var(--color-indigo);
   box-shadow: var(--shadow);
+  transform: translateY(-2px);
 }
 
 .heroCard {
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: 16px;
+  border: 2px solid;
+  border-image: linear-gradient(135deg, var(--color-blue), var(--color-purple)) 1;
+  background: linear-gradient(135deg, var(--color-blue-bg), var(--color-indigo-bg)), var(--surface);
+  border-radius: 24px;
   padding: 16px;
   box-shadow: var(--shadow);
   display: grid;
@@ -305,9 +310,9 @@
   height: 64px;
   display: grid;
   place-items: center;
-  border-radius: 18px;
-  background: var(--accent-bg);
-  border: 1px solid var(--accent-border);
+  border-radius: 22px;
+  background: linear-gradient(135deg, var(--color-indigo-bg), var(--color-pink-bg));
+  border: 2.5px solid var(--color-indigo);
   color: var(--text-h);
   font-weight: 700;
 }
@@ -357,6 +362,37 @@
 
 .section {
   padding: 44px 0 0;
+  position: relative;
+}
+
+.section:nth-of-type(1) {
+  border-left: 4px solid var(--color-indigo);
+  padding-left: 16px;
+}
+
+.section:nth-of-type(2) {
+  border-left: 4px solid var(--color-blue);
+  padding-left: 16px;
+}
+
+.section:nth-of-type(3) {
+  border-left: 4px solid var(--color-green);
+  padding-left: 16px;
+}
+
+.section:nth-of-type(4) {
+  border-left: 4px solid var(--color-orange);
+  padding-left: 16px;
+}
+
+.section:nth-of-type(5) {
+  border-left: 4px solid var(--color-pink);
+  padding-left: 16px;
+}
+
+.section:nth-of-type(6) {
+  border-left: 4px solid var(--color-red);
+  padding-left: 16px;
 }
 
 .sectionHead {
@@ -367,6 +403,11 @@
 
 .sectionHead h2 {
   margin: 0;
+  background: linear-gradient(90deg, var(--color-indigo), var(--color-blue), var(--color-green), var(--color-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
 }
 
 .sectionHead p {
@@ -392,9 +433,9 @@
 }
 
 .card {
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--surface);
-  border-radius: 16px;
+  border-radius: 22px;
   padding: 16px;
   box-shadow: var(--shadow);
 }
@@ -405,6 +446,37 @@
   letter-spacing: -0.2px;
 }
 
+/* Colorful card backgrounds */
+.section:nth-of-type(1) .card:nth-child(1) {
+  background: linear-gradient(135deg, var(--color-red-bg), transparent), var(--surface);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.section:nth-of-type(1) .card:nth-child(2) {
+  background: linear-gradient(135deg, var(--color-blue-bg), transparent), var(--surface);
+  border-color: rgba(14, 165, 233, 0.3);
+}
+
+.section:nth-of-type(1) .card:nth-child(3) {
+  background: linear-gradient(135deg, var(--color-green-bg), transparent), var(--surface);
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.section:nth-of-type(1) .card:nth-child(4) {
+  background: linear-gradient(135deg, var(--color-orange-bg), transparent), var(--surface);
+  border-color: rgba(249, 115, 22, 0.3);
+}
+
+.section:nth-of-type(1) .card:nth-child(5) {
+  background: linear-gradient(135deg, var(--color-pink-bg), transparent), var(--surface);
+  border-color: rgba(236, 72, 153, 0.3);
+}
+
+.section:nth-of-type(1) .card:nth-child(6) {
+  background: linear-gradient(135deg, var(--color-indigo-bg), transparent), var(--surface);
+  border-color: rgba(79, 70, 229, 0.3);
+}
+
 .muted {
   color: var(--text);
 }
@@ -412,6 +484,21 @@
 .projectCard {
   display: grid;
   gap: 14px;
+}
+
+.projectCard:nth-child(1) {
+  border-color: rgba(239, 68, 68, 0.3);
+  background: linear-gradient(135deg, var(--color-red-bg), transparent), var(--surface);
+}
+
+.projectCard:nth-child(2) {
+  border-color: rgba(14, 165, 233, 0.3);
+  background: linear-gradient(135deg, var(--color-blue-bg), transparent), var(--surface);
+}
+
+.projectCard:nth-child(3) {
+  border-color: rgba(34, 197, 94, 0.3);
+  background: linear-gradient(135deg, var(--color-green-bg), transparent), var(--surface);
 }
 
 .shotBlock {
@@ -437,7 +524,7 @@
 
 .miniButton {
   appearance: none;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--surface-2);
   color: var(--text-h);
   border-radius: 999px;
@@ -474,9 +561,9 @@
 .shotThumb {
   scroll-snap-align: start;
   appearance: none;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: transparent;
-  border-radius: 14px;
+  border-radius: 20px;
   padding: 0;
   cursor: pointer;
   overflow: hidden;
@@ -529,9 +616,46 @@
   font-size: 12px;
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--surface-2);
   color: var(--text-h);
+  font-weight: 500;
+}
+
+.tag:nth-child(1) {
+  background: var(--color-red-bg);
+  border-color: var(--color-red);
+  color: var(--color-red);
+}
+
+.tag:nth-child(2) {
+  background: var(--color-blue-bg);
+  border-color: var(--color-blue);
+  color: var(--color-blue);
+}
+
+.tag:nth-child(3) {
+  background: var(--color-green-bg);
+  border-color: var(--color-green);
+  color: var(--color-green);
+}
+
+.tag:nth-child(4) {
+  background: var(--color-orange-bg);
+  border-color: var(--color-orange);
+  color: var(--color-orange);
+}
+
+.tag:nth-child(5) {
+  background: var(--color-pink-bg);
+  border-color: var(--color-pink);
+  color: var(--color-pink);
+}
+
+.tag:nth-child(n+6) {
+  background: var(--color-indigo-bg);
+  border-color: var(--color-indigo);
+  color: var(--color-indigo);
 }
 
 .linkRow {
@@ -570,6 +694,21 @@
   gap: 12px;
 }
 
+.timelineCard:nth-child(1) {
+  border-color: rgba(79, 70, 229, 0.3);
+  background: linear-gradient(135deg, var(--color-indigo-bg), transparent), var(--surface);
+}
+
+.timelineCard:nth-child(2) {
+  border-color: rgba(249, 115, 22, 0.3);
+  background: linear-gradient(135deg, var(--color-orange-bg), transparent), var(--surface);
+}
+
+.timelineCard:nth-child(3) {
+  border-color: rgba(236, 72, 153, 0.3);
+  background: linear-gradient(135deg, var(--color-pink-bg), transparent), var(--surface);
+}
+
 .timelineTop {
   display: flex;
   gap: 12px;
@@ -590,7 +729,7 @@
   letter-spacing: 0.35px;
   padding: 6px 10px;
   border-radius: 999px;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: var(--surface-2);
 }
 
@@ -611,6 +750,30 @@
   overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr;
+}
+
+.certCard:nth-child(1) {
+  border-color: rgba(14, 165, 233, 0.3);
+}
+
+.certCard:nth-child(1) .certMedia {
+  border-bottom-color: rgba(14, 165, 233, 0.3);
+}
+
+.certCard:nth-child(2) {
+  border-color: rgba(34, 197, 94, 0.3);
+}
+
+.certCard:nth-child(2) .certMedia {
+  border-bottom-color: rgba(34, 197, 94, 0.3);
+}
+
+.certCard:nth-child(3) {
+  border-color: rgba(236, 72, 153, 0.3);
+}
+
+.certCard:nth-child(3) .certMedia {
+  border-bottom-color: rgba(236, 72, 153, 0.3);
 }
 
 .certMedia {
@@ -648,13 +811,15 @@
 }
 
 .callout {
-  border: 1px solid var(--border);
+  border: 3px solid;
+  border-image: linear-gradient(120deg, var(--color-purple), var(--color-blue), var(--color-green)) 1;
   background: linear-gradient(
     120deg,
-    color-mix(in oklab, var(--accent-bg) 65%, transparent),
-    color-mix(in oklab, var(--social-bg) 80%, transparent)
+    var(--color-indigo-bg),
+    var(--color-blue-bg),
+    var(--color-green-bg)
   );
-  border-radius: 18px;
+  border-radius: 24px;
   padding: 18px;
   display: flex;
   gap: 16px;
@@ -679,11 +844,11 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  border-radius: 12px;
+  border-radius: 18px;
   padding: 10px 14px;
   font-weight: 650;
   text-decoration: none;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   color: var(--text-h);
   background: var(--surface-2);
   transition: transform 0.12s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -699,8 +864,10 @@
 }
 
 .button.primary {
-  background: var(--accent-bg);
-  border-color: var(--accent-border);
+  background: linear-gradient(135deg, var(--color-blue), var(--color-purple));
+  border-color: var(--color-purple);
+  color: white;
+  font-weight: 700;
 }
 
 .button.ghost {
@@ -730,8 +897,8 @@
 
 .lightboxInner {
   width: min(1100px, 100%);
-  border-radius: 18px;
-  border: 1px solid var(--border);
+  border-radius: 28px;
+  border: 2px solid var(--border);
   background: var(--surface);
   box-shadow: var(--shadow);
   overflow: hidden;
@@ -769,10 +936,10 @@
 
 .lightboxNav {
   appearance: none;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: transparent;
   color: var(--text-h);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 8px 10px;
   font-weight: 650;
   cursor: pointer;
@@ -802,10 +969,10 @@
 
 .lightboxClose {
   appearance: none;
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   background: transparent;
   color: var(--text-h);
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 8px 10px;
   font-weight: 650;
   cursor: pointer;
